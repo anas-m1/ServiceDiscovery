@@ -1,0 +1,4 @@
+Spring cloud is used.
+
+Spring cloud netflix is used
+    netflix-eureka-server is used for service discovery.

@@ -1,0 +1,46 @@
+spring-cloud-starter-netflix-eureka-server added
+in applicatin.properties
+    eureka.client.registerWithEureka=false
+    eureka.client.fetchRegistry=false
+
+@EnableEurekaServer annotation added to main class.
+
+
+now in paymentservice and authservice, add spring-cloud-starter-netflix-eureka-client dependency
+in applicatin.properties
+    eureka.client.registerWithEureka=true
+    eureka.client.fetchRegistry=true
+
+    spring.application.name=productService
+    eureka.client.serviceUrl.defaultZone= http://localhost:8761/eureka/
+
+now 1 usecase for cross service communication
+    eg: lets get a private product for the specific user from authservice
+    i.e. client calls /<userid>/<productid> or just /productID alongwith token
+    productService gets the product if available,
+        if public it returns details.
+        if private,
+            it calls userservice to authenticate token and then returns
+            ideally tokenauth can happen in productservice itself , but we dont have kms like centralservice here. also this is to showcase interservice comm
+
+    new endpoint is created for this in productService
+
+    Important: while calling authservice from productservice, resttemplate bean has to be created.
+
+
+git init
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
